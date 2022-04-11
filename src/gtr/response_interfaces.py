@@ -85,6 +85,14 @@ class Addresses(TypedDict):
     address: List[Address]
 
 
+class ValuePounds(TypedDict):
+    currencyCode: str
+    amount: float
+
+
+######
+
+
 class Person(TypedDict):
     links: Links
     id: str
@@ -124,6 +132,17 @@ class Organisation(TypedDict):
     name: str
 
 
+class Fund(TypedDict):
+    links: Links
+    id: str
+    href: str
+    created: date
+    start: date
+    end: date
+    valuePounds: ValuePounds
+    category: str
+
+
 ########
 
 
@@ -135,5 +154,5 @@ class ProjectsResponse(Response):
     project: List[Project]
 
 
-class ProjectsOrganisationsResponse(Response):
+class OrganisationsResponse(Response):
     organisation: List[Organisation]

@@ -42,6 +42,33 @@ class ProjectSortFields(enum.Enum):
     RELEVANCE = "score"
 
 
+class OrganisationSearchFields(enum.Enum):
+    ORGANISATION_NAME = "org.n"
+    PROJECT_TITLES = "org.pro.t"
+    ORCID_ID = "org.orcidId"
+    PROJECT_ABCSTRACTS = "org.pro.a"
+
+
+class OrganisationSortFields(enum.Enum):
+    ORGANISATION_NAME = "org.n"
+    RELEVANCE = "score"
+
+
+class FundsSearchFields(enum.Enum):
+    FUNDED_PROJECT_TITLE = "fu.pro.t"
+    FUND_AMOUNT = "fu.am"
+    FUNDER_ORGANISATION_NAME = "fu.org.n"
+    FUND_TYPE = "fu.ty"
+
+
+class FundsSortFields(enum.Enum):
+    FUND_START_DATE = "fu.sd"
+    FUND_END_DATE = "fu.ed"
+    FUND_AMOUNT = "fu.am"
+    FUND_TYPE = "fu.ty"
+    RELEVANCE = "score"
+
+
 #############
 
 
@@ -60,3 +87,13 @@ class PeopleQuery(Query):
 class ProjectsQuery(Query):
     search_fields: NotRequired[List[ProjectSearchFields]]
     sort_fields: NotRequired[ProjectSortFields]
+
+
+class OrganisationsQuery(Query):
+    search_fields: NotRequired[List[OrganisationSearchFields]]
+    sort_fields: NotRequired[OrganisationSortFields]
+
+
+class FundsQuery(Query):
+    search_fields: NotRequired[List[FundsSearchFields]]
+    sort_fields: NotRequired[FundsSortFields]

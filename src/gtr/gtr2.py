@@ -1,3 +1,4 @@
+from time import time
 import requests
 import re
 import math
@@ -77,7 +78,7 @@ class GtR2Client:
             "Accept": "application/vnd.rcuk.gtr.json-v7",
         }
 
-        r = requests.get(url, headers=headers, params=request_params)
+        r = requests.get(url, headers=headers, params=request_params, timeout=5)
 
         if r.ok:
             return self.__convert_json(r.json())
@@ -91,5 +92,18 @@ class GtR2Client:
     def get_projects(self, query: ProjectsQuery = {}) -> ProjectsResponse:
         return self.__get("/projects", query)
 
-    def get_project_organisations(self, id: str) -> ProjectsOrganisationsResponse:
+    def get_organisations(
+        self, query: OrganisationsQuery = {}
+    ) -> OrganisationsResponse:
+        return self.__get("/organisations", query)
+
+    def get_funds(self, query: FundsQuery = {}):
+        return self.__get("/funds", query)
+
+    ####
+
+    def get_project_organisations(self, id: str) -> OrganisationsResponse:
         return self.__get("/projects/" + id + "/organisations")
+
+    def get_project_persons(self, id: str) -> PeopleResponse:
+        return self.__get("/projects/" + id + "/persons")
