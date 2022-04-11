@@ -68,6 +68,8 @@ class FundsSortFields(enum.Enum):
     FUND_TYPE = "fu.ty"
     RELEVANCE = "score"
 
+class OutcomesSortFields():
+    RELEVANCE = "score" 
 
 #############
 
@@ -97,3 +99,6 @@ class OrganisationsQuery(Query):
 class FundsQuery(Query):
     search_fields: NotRequired[List[FundsSearchFields]]
     sort_fields: NotRequired[FundsSortFields]
+
+class Outcomes(Query):
+    sort_fields: NotRequired[OutcomesSortFields]

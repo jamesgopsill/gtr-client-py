@@ -1,4 +1,3 @@
-from time import time
 import requests
 import re
 import math
@@ -42,7 +41,10 @@ class GtR2Client:
             elif isinstance(v, list):
                 new_list = []
                 for obj in v:
-                    new_list.append(self.__convert_json(obj))
+                    if isinstance(v, dict):
+                        new_list.append(self.__convert_json(obj))
+                    else:
+                        new_list.append(self.__convert_dates(obj))
                 new_d[self.__camel_to_underscore(k)] = new_list
             else:
                 new_d[self.__camel_to_underscore(k)] = self.__convert_dates(v)
@@ -86,24 +88,42 @@ class GtR2Client:
             print("|- ", r.status_code)
             raise Exception("|- Error with request")
 
-    def get_people(self, query: PeopleQuery = {}) -> PeopleResponse:
+    
+    def schema(self, item: str):
+        url = self.__url +"/"+ item
+        headers = {
+            "Accept": "application/vnd.rcuk.gtr.xml-v7"
+        }
+        r = requests.get(url, headers=headers, timeout=5)
+
+        if not r.ok:
+            print("|- ", r.status_code)
+            raise Exception("|- Error with request")
+
+        return r.text
+    
+    def people(self, query: PeopleQuery = {}) -> PeopleResponse:
         return self.__get("/persons", query)
 
-    def get_projects(self, query: ProjectsQuery = {}) -> ProjectsResponse:
+    def projects(self, query: ProjectsQuery = {}) -> ProjectsResponse:
         return self.__get("/projects", query)
 
-    def get_organisations(
-        self, query: OrganisationsQuery = {}
-    ) -> OrganisationsResponse:
+    def organisations(self, query: OrganisationsQuery = {}) -> OrganisationsResponse:
         return self.__get("/organisations", query)
 
-    def get_funds(self, query: FundsQuery = {}):
+    def funds(self, query: FundsQuery = {}) -> FundsResponse:
         return self.__get("/funds", query)
+
+    def outcomes(self, query = {}):
+        return self.__get("/outcomes", query)
 
     ####
 
-    def get_project_organisations(self, id: str) -> OrganisationsResponse:
+    def project_organisations(self, id: str) -> OrganisationsResponse:
         return self.__get("/projects/" + id + "/organisations")
 
-    def get_project_persons(self, id: str) -> PeopleResponse:
+    def project_persons(self, id: str) -> PeopleResponse:
         return self.__get("/projects/" + id + "/persons")
+
+    def project_funds(self, id: str) -> FundsResponse:
+        return self.__get("/projects/" + id + "/funds")
