@@ -5,14 +5,14 @@ gtr = GtR2Client(debug=True)
 
 query: ProjectsQuery = {
     "page_size": 10, 
-    "query": "Manufacturing"
+    "query": "manufacturing"
 }
 
-projects = gtr.get_projects(query)
+projects = gtr.projects(query)
 
 for project in projects["project"]:
     
-    pprint(project, depth=1)
+    pprint(project["title"], depth=1)
     
     orgs = gtr.project_organisations(project["id"])
     pprint(orgs["organisation"][0], depth=1)

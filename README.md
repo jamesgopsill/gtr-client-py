@@ -1,11 +1,46 @@
 # A python package for the GtR API
 
+This client is a fully-typed python client for the [UKRI's Gateway to Research API](https://gtr.ukri.org/).
+
+## Getting Started
+
+I haven't put the package on pypi just yet so installing the package requires installing it from the repo.
+
+```
+pip install git+https://github.com/jamesgopsill/gtr-client-py.git#egg=gtr
+```
+
+You can then use if in your python code like so:
+
+```python
+from gtr import GtR2Client, ProjectsQuery
+from pprint import pprint
+
+gtr = GtR2Client(debug=True)
+
+query: ProjectsQuery = {
+    "page_size": 10, 
+    "query": "manufacturing"
+}
+
+projects = gtr.projects(query)
+
+for project in projects["project"]:
+    
+    pprint(project["title"], depth=1)
+```
+
+For more examples, please see the [`examples`](./examples) folder.
 
 ## Development
+
+I would recommend creating a virtual environment for development work.
 
 ```
 python -m venv .venv
 ```
+
+Then activate it using.
 
 **Mac / Linux**
 
@@ -13,17 +48,19 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-**Windows (Powershell)**
+**Windows**
 
 ```
-.venv/Scripts/activate.ps1
+.venv/Scripts/activate
 ```
+
+Then install the development requirements.
 
 ```
 pip install -r requirements_dev.txt
 ```
 
-Install the package within your local dev environment.
+And then install the package within your local virtual dev environment.
 
 ```
 pip install -e .
@@ -36,6 +73,8 @@ pip install -e .
 
 ## Documentation
 
+Documentation is generated using:
+
 ```
 pdoc ./docs ./src/gtr
 ```
@@ -44,6 +83,8 @@ pdoc ./docs ./src/gtr
 
 ## Formatting
 
+And we format the code using black.
+
 ```
 black src/
 ```
@@ -51,6 +92,8 @@ black src/
 - https://github.com/psf/black
 
 ## Testing
+
+Testing uses unittest.
 
 ```
 python -m unittest -v

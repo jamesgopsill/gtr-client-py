@@ -1,5 +1,4 @@
 from typing import TypedDict, List
-from typing_extensions import NotRequired
 import enum
 
 
@@ -68,37 +67,40 @@ class FundsSortFields(enum.Enum):
     FUND_TYPE = "fu.ty"
     RELEVANCE = "score"
 
-class OutcomesSortFields():
-    RELEVANCE = "score" 
+
+class OutcomesSortFields:
+    RELEVANCE = "score"
+
 
 #############
 
 
-class Query(TypedDict):
-    query: NotRequired[str]
-    page: NotRequired[int]
-    page_size: NotRequired[int]
-    sort_order: NotRequired[SortOrder]
+class Query(TypedDict, total=False):
+    query: str
+    page: int
+    page_size: int
+    sort_order: SortOrder
 
 
-class PeopleQuery(Query):
-    search_fields: NotRequired[List[PeopleSearchFields]]
-    sort_fields: NotRequired[PeopleSortFields]
+class PeopleQuery(Query, total=False):
+    search_fields: List[PeopleSearchFields]
+    sort_fields: PeopleSortFields
 
 
-class ProjectsQuery(Query):
-    search_fields: NotRequired[List[ProjectSearchFields]]
-    sort_fields: NotRequired[ProjectSortFields]
+class ProjectsQuery(Query, total=False):
+    search_fields: List[ProjectSearchFields]
+    sort_fields: ProjectSortFields
 
 
-class OrganisationsQuery(Query):
-    search_fields: NotRequired[List[OrganisationSearchFields]]
-    sort_fields: NotRequired[OrganisationSortFields]
+class OrganisationsQuery(Query, total=False):
+    search_fields: List[OrganisationSearchFields]
+    sort_fields: OrganisationSortFields
 
 
-class FundsQuery(Query):
-    search_fields: NotRequired[List[FundsSearchFields]]
-    sort_fields: NotRequired[FundsSortFields]
+class FundsQuery(Query, total=False):
+    search_fields: List[FundsSearchFields]
+    sort_fields: FundsSortFields
 
-class Outcomes(Query):
-    sort_fields: NotRequired[OutcomesSortFields]
+
+class OutcomesQuery(Query, total=False):
+    sort_fields: OutcomesSortFields

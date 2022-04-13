@@ -88,12 +88,9 @@ class GtR2Client:
             print("|- ", r.status_code)
             raise Exception("|- Error with request")
 
-    
     def schema(self, item: str):
-        url = self.__url +"/"+ item
-        headers = {
-            "Accept": "application/vnd.rcuk.gtr.xml-v7"
-        }
+        url = self.__url + "/" + item
+        headers = {"Accept": "application/vnd.rcuk.gtr.xml-v7"}
         r = requests.get(url, headers=headers, timeout=5)
 
         if not r.ok:
@@ -101,7 +98,9 @@ class GtR2Client:
             raise Exception("|- Error with request")
 
         return r.text
-    
+
+    ### Get Objects Methods
+
     def people(self, query: PeopleQuery = {}) -> PeopleResponse:
         return self.__get("/persons", query)
 
@@ -114,10 +113,100 @@ class GtR2Client:
     def funds(self, query: FundsQuery = {}) -> FundsResponse:
         return self.__get("/funds", query)
 
-    def outcomes(self, query = {}):
+    def outcomes(self, query: OutcomesQuery = {}) -> OutcomesResponse:
         return self.__get("/outcomes", query)
 
-    ####
+    def keyfindings(self, query: OutcomesQuery = {}) -> KeyFindingsResponse:
+        return self.__get("/outcomes/keyfindings", query)
+
+    def impactsummaries(self, query: OutcomesQuery = {}) -> ImpactSummariesResponse:
+        return self.__get("/outcomes/impactsummaries", query)
+
+    def publications(self, query: OutcomesQuery = {}) -> PublicationsResponse:
+        return self.__get("/outcomes/publications", query)
+
+    def collaborations(self, query: OutcomesQuery = {}) -> CollaborationsResponse:
+        return self.__get("/outcomes/collaborations", query)
+
+    def intellectual_properties(
+        self, query: OutcomesQuery = {}
+    ) -> IntellectualPropertiesResponse:
+        return self.__get("/outcomes/intellectualproperties", query)
+
+    def policy_influences(self, query: OutcomesQuery = {}) -> PolicyInfluencesResponse:
+        return self.__get("/outcomes/policyinfluences", query)
+
+    def products(self, query: OutcomesQuery = {}) -> ProductsResponse:
+        return self.__get("/outcomes/products", query)
+
+    def research_materials(
+        self, query: OutcomesQuery = {}
+    ) -> ResearchMaterialsResponse:
+        return self.__get("/outcomes/research_materials", query)
+
+    def spin_outs(self, query: OutcomesQuery = {}) -> SpinOutResponse:
+        return self.__get("/outcomes/spinouts", query)
+
+    def further_fundings(self, query: OutcomesQuery = {}) -> FurtherFundingsResponse:
+        return self.__get("/outcomes/furtherfundings", query)
+
+    def disseminations(self, query: OutcomesQuery = {}) -> DisseminationsResponse:
+        return self.__get("/outcomes/disseminations", query)
+
+    ### Get Object methods
+
+    def person(self, id: str) -> Person:
+        return self.__get("/persons/" + id)
+
+    def project(self, id: str) -> Project:
+        return self.__get("/project/" + id)
+
+    def organisation(self, id: str) -> Organisation:
+        return self.__get("/organisations/" + id)
+
+    def fund(self, id: str) -> Fund:
+        return self.__get("/funds/" + id)
+
+    def key_finding(self, id: str) -> Person:
+        return self.__get("/keyfindings/" + id)
+
+    def impact_summary(self, id: str) -> ImpactSummary:
+        return self.__get("/impactsummaries/" + id)
+
+    def publication(self, id: str) -> Publication:
+        return self.__get("/publication/" + id)
+
+    def collaboration(self, id: str) -> Collaboration:
+        return self.__get("/collaboration/" + id)
+
+    def intellectual_propety(self, id: str) -> IntellectualProperty:
+        return self.__get("/intellectualproperties/" + id)
+
+    def policy_influence(self, id: str) -> PolicyInfluence:
+        return self.__get("/policyinfluences/" + id)
+
+    def product(self, id: str) -> Product:
+        return self.__get("/products/" + id)
+
+    def research_material(self, id: str) -> ResearchMaterial:
+        return self.__get("/researchmaterials/" + id)
+
+    def spin_out(self, id: str) -> SpinOut:
+        return self.__get("/spinouts/" + id)
+
+    def further_funding(self, id: str) -> FurtherFunding:
+        return self.__get("/furtherfundings/" + id)
+
+    def dissemination(self, id: str) -> Dissemination:
+        return self.__get("/disseminations/" + id)
+
+    ## Get Associated Object Methods
+
+    def person_projects(self, id: str) -> ProjectsResponse:
+        return self.__get("/persons/" + id + "/projects")
+
+    def person_organisations(self, id: str) -> OrganisationsResponse:
+        return self.__get("/persons/" + id + "/organisations")
 
     def project_organisations(self, id: str) -> OrganisationsResponse:
         return self.__get("/projects/" + id + "/organisations")
@@ -127,3 +216,35 @@ class GtR2Client:
 
     def project_funds(self, id: str) -> FundsResponse:
         return self.__get("/projects/" + id + "/funds")
+
+    def project_outcomes(self, id: str) -> OutcomesResponse:
+        return self.__get("/projects/" + id + "/outcomes")
+
+    def project_key_findings(self, id: str) -> KeyFindingsResponse:
+        return self.__get("/projects/" + id + "/outcomes/keyfindings")
+
+    def project_impact_summaries(self, id: str) -> ImpactSummariesResponse:
+        return self.__get("/projects/" + id + "/outcomes/impactsummaries")
+
+    def project_publications(self, id: str) -> PublicationsResponse:
+        return self.__get("/projects/" + id + "/outcomes/publications")
+
+    def project_collaborations(self, id: str) -> CollaborationsResponse:
+        return self.__get("/projects/" + id + "/outcomes/collaborations")
+
+    def project_intellectual_properties(
+        self, id: str
+    ) -> IntellectualPropertiesResponse:
+        return self.__get("/projects/" + id + "/outcomes/intellectualproperties")
+
+    def project_products(self, id: str) -> ProductsResponse:
+        return self.__get("/projects/" + id + "/outcomes/products")
+
+    def project_research_materials(self, id: str) -> ResearchMaterialsResponse:
+        return self.__get("/projects/" + id + "/outcomes/researchmaterials")
+
+    def project_spin_outs(self, id: str) -> SpinOutResponse:
+        return self.__get("/projects/" + id + "/outcomes/spinouts")
+
+    def project_disseminations(self, id: str) -> DisseminationsResponse:
+        return self.__get("/projects/" + id + "/outcomes/disseminations")

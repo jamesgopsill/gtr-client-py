@@ -1,7 +1,6 @@
 from re import S
 from time import strftime
 from typing import TypedDict, List, Any
-from typing_extensions import NotRequired
 from datetime import date
 
 
@@ -15,8 +14,8 @@ class Response(TypedDict):
 class Link(TypedDict):
     href: str
     rel: str
-    start: NotRequired[date]
-    end: NotRequired[date]
+    start: date
+    end: date
     other_attributes: Any
 
 
@@ -95,7 +94,7 @@ class ValuePounds(TypedDict):
 ######
 
 
-class Person(TypedDict):
+class Person(TypedDict, total=False):
     links: Links
     id: str
     href: str
@@ -103,10 +102,10 @@ class Person(TypedDict):
     first_name: str
     other_names: str
     surname: str
-    orcid_id: NotRequired[str]
+    orcid_id: str
 
 
-class Project(TypedDict):
+class Project(TypedDict, total=False):
     links: Links
     id: str
     href: str
@@ -116,17 +115,17 @@ class Project(TypedDict):
     status: str
     grant_category: str
     lead_funder: str
-    lead_organisation_department: NotRequired[str]
+    lead_organisation_department: str
     abstract_text: str
     health_categories: HealthCategories
     research_activities: Any
     research_subjects: ResearchSubjects
     research_topics: ResearchTopics
     rcuk_programmes: Any
-    participant_values: NotRequired[ParticipantValues]
+    participant_values: ParticipantValues
 
 
-class Organisation(TypedDict):
+class Organisation(TypedDict, total=False):
     links: Links
     addresses: Addresses
     href: str
@@ -134,206 +133,223 @@ class Organisation(TypedDict):
     name: str
 
 
-class Fund(TypedDict):
+class Fund(TypedDict, total=False):
     links: Links
     id: str
     href: str
     created: date
-    start: NotRequired[date]
-    end: NotRequired[date]
+    start: date
+    end: date
     valuePounds: ValuePounds
-    category: NotRequired[str]
-    created: NotRequired[str]
+    category: str
+    created: str
 
-class KeyFinding(TypedDict):
+
+class KeyFinding(TypedDict, total=False):
     description: str
     non_academic_uses: str
     exploitation_pathways: str
 
-class Publication(TypedDict):
+
+class Publication(TypedDict, total=False):
     title: str
-    type: NotRequired[str]
-    abstract_text: NotRequired[str]
-    other_information: NotRequired[str]
-    journal_title: NotRequired[str]
-    date_published: NotRequired[date]
-    publication_url: NotRequired[str]
-    pub_med_id: NotRequired[str]
-    isbn: NotRequired[str]
-    issn: NotRequired[str]
-    series_number: NotRequired[str]
-    series_title: NotRequired[str]
-    sub_title: NotRequired[str]
-    volume_title: NotRequired[str]
-    doi: NotRequired[str]
-    volume_number: NotRequired[str]
-    issue: NotRequired[str]
-    total_pages: NotRequired[str]
-    edition: NotRequired[str]
-    chapter_number: NotRequired[str]
-    chapter_title: NotRequired[str]
-    page_reference: NotRequired[str]
-    conference_event: NotRequired[str]
-    conference_location: NotRequired[str]
-    conference_number: NotRequired[str]
-    author: NotRequired[str]
+    type: str
+    abstract_text: str
+    other_information: str
+    journal_title: str
+    date_published: date
+    publication_url: str
+    pub_med_id: str
+    isbn: str
+    issn: str
+    series_number: str
+    series_title: str
+    sub_title: str
+    volume_title: str
+    doi: str
+    volume_number: str
+    issue: str
+    total_pages: str
+    edition: str
+    chapter_number: str
+    chapter_title: str
+    page_reference: str
+    conference_event: str
+    conference_location: str
+    conference_number: str
+    author: str
 
-class Collaboration(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    parent_organisation: NotRequired[str]
-    child_organisation: NotRequired[str]
-    principal_investigator_contribution: NotRequired[str]
-    partner_contribution: NotRequired[str]
-    start: NotRequired[date]
-    end: NotRequired[date]
-    sector: NotRequired[str]
-    country: NotRequired[str]
-    impact: NotRequired[str]
-    supporting_url: NotRequired[str]
 
-class Dissemination(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    form: NotRequired[str]
-    primary_audience: NotRequired[str]
-    years_of_dissmemination: NotRequired[str]
-    results: NotRequired[str]
-    impact: NotRequired[str]
-    type_of_presentation: NotRequired[str]
-    geographic_reach: NotRequired[str]
-    part_of_official_scheme: NotRequired[bool]
-    supporting_url: NotRequired[str]
+class Collaboration(TypedDict, total=False):
+    title: str
+    description: str
+    parent_organisation: str
+    child_organisation: str
+    principal_investigator_contribution: str
+    partner_contribution: str
+    start: date
+    end: date
+    sector: str
+    country: str
+    impact: str
+    supporting_url: str
 
-class FurtherFunding(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    narrative: NotRequired[str]
-    amount: NotRequired[ValuePounds]
-    organisation: NotRequired[str]
-    department: NotRequired[str]
-    funding_id: NotRequired[str]
-    start: NotRequired[date]
-    end: NotRequired[date]
-    sector: NotRequired[str]
-    country: NotRequired[str]
 
-class Exploitation(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    method: NotRequired[str]
-    other_involvement: NotRequired[str]
-    ip_exploited: NotRequired[bool]
-    start: NotRequired[date]
+class Dissemination(TypedDict, total=False):
+    title: str
+    description: str
+    form: str
+    primary_audience: str
+    years_of_dissmemination: str
+    results: str
+    impact: str
+    type_of_presentation: str
+    geographic_reach: str
+    part_of_official_scheme: bool
+    supporting_url: str
 
-class ImpactSummary(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    impact_types: NotRequired[List[str]]
-    summary: NotRequired[str]
-    beneficiaries: NotRequired[str]
-    contribution_method: NotRequired[str]
-    sector: NotRequired[str]
+
+class FurtherFunding(TypedDict, total=False):
+    title: str
+    description: str
+    narrative: str
+    amount: ValuePounds
+    organisation: str
+    department: str
+    funding_id: str
+    start: date
+    end: date
+    sector: str
+    country: str
+
+
+class Exploitation(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    method: str
+    other_involvement: str
+    ip_exploited: bool
+    start: date
+
+
+class ImpactSummary(TypedDict, total=False):
+    title: str
+    description: str
+    impact_types: List[str]
+    summary: str
+    beneficiaries: str
+    contribution_method: str
+    sector: str
     first_year_of_impact: int
 
-class IntellectualProperty(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    protection: NotRequired[str]
-    patent_id: NotRequired[str]
+
+class IntellectualProperty(TypedDict, total=False):
+    title: str
+    description: str
+    protection: str
+    patent_id: str
     year_protection_granted: int
-    type: NotRequired[str]
-    impact: NotRequired[str]
-    licensed: NotRequired[str]
-    patent_url: NotRequired[str]
-    start: NotRequired[date]
-    end: NotRequired[date]
+    type: str
+    impact: str
+    licensed: str
+    patent_url: str
+    start: date
+    end: date
 
-class PolicyInfluence(TypedDict):
-    influence: NotRequired[str]
-    type: NotRequired[str]
-    guideline_title: NotRequired[str]
-    impact: NotRequired[str]
-    methods: NotRequired[str]
-    areas: NotRequired[List[str]]
-    geographic_reach: NotRequired[str]
-    supporting_url: NotRequired[str]
 
-class Product(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    stage: NotRequired[str]
-    status: NotRequired[str]
-    clinical_trial: NotRequired[bool]
-    ukcrn_isctn_id: NotRequired[str]
-    year_development_completed: NotRequired[int]
-    impact: NotRequired[str]
-    supporting_url: NotRequired[str]
+class PolicyInfluence(TypedDict, total=False):
+    influence: str
+    type: str
+    guideline_title: str
+    impact: str
+    methods: str
+    areas: List[str]
+    geographic_reach: str
+    supporting_url: str
 
-class ResearchMaterial(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    impact: NotRequired[str]
-    software_developed: NotRequired[bool]
-    software_open_sourced: NotRequired[bool]
-    provided_to_others: NotRequired[bool]
-    year_first_provided: NotRequired[int]
-    supporting_url: NotRequired[str]
 
-class ArtisticAndCreativeProduct(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    impact: NotRequired[str]
-    year_first_provided: NotRequired[int]
-    supporting_url: NotRequired[str]
+class Product(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    stage: str
+    status: str
+    clinical_trial: bool
+    ukcrn_isctn_id: str
+    year_development_completed: int
+    impact: str
+    supporting_url: str
 
-class ResearchDatabaseAndModel(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    impact: NotRequired[str]
-    provided_to_others: NotRequired[bool]
-    year_first_provided: NotRequired[str]
-    supporting_url: NotRequired[str]
 
-class SoftwareAndTechnicalProduct(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    impact: NotRequired[str]
-    software_open_sourced: NotRequired[bool]
-    open_source_license: NotRequired[bool]
-    provided_to_others: NotRequired[bool]
-    year_first_provided: NotRequired[int]
-    supporting_url: NotRequired[str]
+class ResearchMaterial(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    impact: str
+    software_developed: bool
+    software_open_sourced: bool
+    provided_to_others: bool
+    year_first_provided: int
+    supporting_url: str
 
-class SpinOut(TypedDict):
-    description: NotRequired[str]
-    company_name: NotRequired[str]
-    company_description: NotRequired[str]
-    impact: NotRequired[str]
-    website: NotRequired[str]
-    registration_number: NotRequired[str]
-    year_established: NotRequired[str]
-    ip_exploited: NotRequired[bool]
-    joint_venture: NotRequired[bool]
 
-class OtherResearchItem(TypedDict):
-    title: NotRequired[str]
-    description: NotRequired[str]
-    type: NotRequired[str]
-    sub_title: NotRequired[str]
-    series_title: NotRequired[str]
-    series_number: NotRequired[str]
-    other_information: NotRequired[str]
-    edition: NotRequired[str]
-    doi: NotRequired[str]
-    publisher: NotRequired[str]
-    supporting_url: NotRequired[str]
+class ArtisticAndCreativeProduct(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    impact: str
+    year_first_provided: int
+    supporting_url: str
+
+
+class ResearchDatabaseAndModel(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    impact: str
+    provided_to_others: bool
+    year_first_provided: str
+    supporting_url: str
+
+
+class SoftwareAndTechnicalProduct(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    impact: str
+    software_open_sourced: bool
+    open_source_license: bool
+    provided_to_others: bool
+    year_first_provided: int
+    supporting_url: str
+
+
+class SpinOut(TypedDict, total=False):
+    description: str
+    company_name: str
+    company_description: str
+    impact: str
+    website: str
+    registration_number: str
+    year_established: str
+    ip_exploited: bool
+    joint_venture: bool
+
+
+class OtherResearchItem(TypedDict, total=False):
+    title: str
+    description: str
+    type: str
+    sub_title: str
+    series_title: str
+    series_number: str
+    other_information: str
+    edition: str
+    doi: str
+    publisher: str
+    supporting_url: str
+
 
 #######
 
@@ -353,6 +369,7 @@ class OrganisationsResponse(Response):
 class FundsResponse(Response):
     fund: List[Fund]
 
+
 class OutcomesResponse(Response):
     artistic_and_creative_product: List[ArtisticAndCreativeProduct]
     collaboration: List[Collaboration]
@@ -370,3 +387,47 @@ class OutcomesResponse(Response):
     research_material: List[ResearchMaterial]
     software_and_technical_product: List[SoftwareAndTechnicalProduct]
     spin_out: List[SpinOut]
+
+
+class KeyFindingsResponse(Response):
+    key_finding: List[KeyFinding]
+
+
+class ImpactSummariesResponse(Response):
+    impact_summary: List[ImpactSummary]
+
+
+class PublicationsResponse(Response):
+    publication: List[Publication]
+
+
+class CollaborationsResponse(Response):
+    collaborations: List[Collaboration]
+
+
+class IntellectualPropertiesResponse(Response):
+    intellectual_property: List[IntellectualProperty]
+
+
+class PolicyInfluencesResponse(Response):
+    policy_influence: List[PolicyInfluence]
+
+
+class ProductsResponse(Response):
+    products: List[Product]
+
+
+class ResearchMaterialsResponse(Response):
+    research_material: List[ResearchMaterial]
+
+
+class SpinOutResponse(Response):
+    spin_out: List[SpinOut]
+
+
+class FurtherFundingsResponse(Response):
+    further_funding: List[FurtherFunding]
+
+
+class DisseminationsResponse(Response):
+    dissemination: List[Dissemination]

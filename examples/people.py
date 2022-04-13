@@ -3,7 +3,7 @@ from pprint import pprint
 
 gtr = GtR2Client(debug=True)
 
-people = gtr.get_people()
+people = gtr.people()
 
 pprint(people["size"])
 pprint(people["person"][0])
