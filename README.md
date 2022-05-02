@@ -10,7 +10,9 @@ I haven't put the package on pypi just yet so installing the package requires in
 pip install git+https://github.com/jamesgopsill/gtr-client-py.git#egg=gtr
 ```
 
-You can then use if in your python code like so:
+- https://stackoverflow.com/questions/15268953/how-to-install-python-package-from-github
+
+You can then use it in your python code like so:
 
 ```python
 from gtr import GtR2Client, ProjectsQuery
@@ -76,8 +78,18 @@ pip install -e .
 Documentation is generated using:
 
 ```
-pdoc ./docs ./src/gtr
+pdoc ./src/gtr
 ```
+
+If you want to run it on a localhost server for development.
+
+**or**
+
+```
+pdoc ./src/gtr -o ./docs
+```
+
+To write new docs to the repo.
 
 - https://pdoc.dev/
 

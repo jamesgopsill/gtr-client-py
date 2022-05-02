@@ -4,17 +4,25 @@ import math
 from datetime import datetime
 from typing import Dict
 
-from .query_interfaces import *
-from .response_interfaces import *
+from .query_typings import *
+from .response_typings import *
 
 
 class GtR2Client:
-
+    """A client to access the [GtR-2 API](https://gtr.ukri.org/resources/api.html)."""
     __url: str = "https://gtr.ukri.org/gtr/api"
     __debug: bool = False
     __camel_pat = re.compile(r"([A-Z])")
 
     def __init__(self, debug: bool = False):
+        """
+        Initialise an instance of the GtR2 client.
+        ```
+        from gtr import GtR2Client
+        
+        gtr = GtR2Client()
+        ```
+        """
         self.__debug = debug
         return
 
@@ -102,9 +110,40 @@ class GtR2Client:
     ### Get Objects Methods
 
     def people(self, query: PeopleQuery = {}) -> PeopleResponse:
+        """
+        Search the people on Gateway to Research.
+        ```
+        from gtr import GtR2Client
+        from pprint import pprint
+
+        gtr = GtR2Client()
+
+        people = gtr.people()
+
+        pprint(people, depth=2)
+        ```
+        """
         return self.__get("/persons", query)
 
     def projects(self, query: ProjectsQuery = {}) -> ProjectsResponse:
+        """
+        Search the projects on Gateway to Research.
+        ```
+        from gtr import GtR2Client, ProjectsQuery
+        from pprint import pprint
+
+        gtr = GtR2Client()
+
+        query: ProjectsQuery = {
+            "page_size": 10, 
+            "query": "manufacturing"
+        }
+
+        projects = gtr.projects(query)
+
+        pprint(projects, depth=2)
+        ```
+        """
         return self.__get("/projects", query)
 
     def organisations(self, query: OrganisationsQuery = {}) -> OrganisationsResponse:

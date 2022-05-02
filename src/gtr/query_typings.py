@@ -76,31 +76,50 @@ class OutcomesSortFields:
 
 
 class Query(TypedDict, total=False):
+    """"""
     query: str
+    """"""
     page: int
+    """"""
     page_size: int
+    """"""
     sort_order: SortOrder
+    """"""
 
 
 class PeopleQuery(Query, total=False):
+    """"""
     search_fields: List[PeopleSearchFields]
+    """"""
     sort_fields: PeopleSortFields
+    """"""
 
 
 class ProjectsQuery(Query, total=False):
+    """"""
     search_fields: List[ProjectSearchFields]
+    """"""
     sort_fields: ProjectSortFields
+    """"""
 
 
 class OrganisationsQuery(Query, total=False):
+    """"""
     search_fields: List[OrganisationSearchFields]
+    """"""
     sort_fields: OrganisationSortFields
+    """"""
 
 
 class FundsQuery(Query, total=False):
+    """"""
     search_fields: List[FundsSearchFields]
+    """"""
     sort_fields: FundsSortFields
+    """"""
 
 
 class OutcomesQuery(Query, total=False):
+    """"""
     sort_fields: OutcomesSortFields
+    """"""
